@@ -1,0 +1,308 @@
+// reset
+*{
+    box-sizing: border-box;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-size: 13px;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5em;
+    background-color: #f1f1f1;
+}
+
+a {
+    color: #999;
+    text-decoration: none;
+}
+
+// 定义变量
+$colors: ("primary":#db9e3f,
+    "white":#fff,
+    "light":#f9f9f9,
+    "light-1":#d4d9de,
+    "grey":#999,
+    "dark-1":#343440,
+    "dark-2":#666,
+    "dark":#222,
+    "black":#000,
+    "news":#1e96ab,
+    "hot":#ff3636,
+    "active":#f09a37,
+    "match":#4d9cff,
+    "title":#4394e4,
+    "time":#9fa0a0
+);
+.a{
+    color: yellow;
+}
+$border-color:map-get($map: $colors, $key: "light-1");
+// color
+@each $colorKey,
+$color in $colors {
+    .text-#{$colorKey} {
+        color: $color;
+    }
+
+    .bg-#{$colorKey} {
+        background: $color;
+    }
+}
+
+// text-align
+@each $var in (left, center, right) {
+    .text-#{$var} {
+        text-align: $var;
+    }
+}
+.text-hidden {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+// font-size
+$base-font-size: 1rem;
+$font-sizes: (
+    xxs:8/13,
+    xs:10/13,
+    sm:12/13,
+    md:13/13,
+    lg:14/13,
+    xl:16/13,
+);
+
+@each $sizeKey,
+$size in $font-sizes {
+    .fs-#{$sizeKey} {
+        font-size: $size * $base-font-size;
+    }
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-wrap{
+    flex-wrap: wrap;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+$flex-jc: (start:flex-start,
+    end:flex-end,
+    center:center,
+    between:space-between,
+    around:space-around,
+);
+
+@each $key,
+$value in $flex-jc {
+    .jc-#{$key} {
+        justify-content: $value;
+    }
+}
+
+$flex-ai: (start:flex-start,
+    end:flex-end,
+    center:center,
+    stretch:stretch,
+);
+
+@each $key,
+$value in $flex-ai {
+    .ai-#{$key} {
+        align-items: $value;
+    }
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+// .mt-1 => margin-top 一级  1rem ...
+$spacing-types: (m:margin,
+    p:padding,
+);
+$spacing-directions:(t:top,
+    r:right,
+    b:bottom,
+    l:left,
+);
+$spacing-base-size: 1rem;
+$spacing-sizes: (
+    0:0,
+    1:0.25,
+    2:0.5,
+    2x:0.75,
+    3:1,
+    4:1.5,
+    5:3
+);
+@each $typeKey,$type in $spacing-types {
+    // .m-1
+    @each $sizeKey,$size in $spacing-sizes {
+        .#{$typeKey}-#{$sizeKey} {
+            #{$type}:$size * $spacing-base-size 
+        }
+    }
+    //.mx-1 .my-1
+    @each $sizeKey,$size in $spacing-sizes {
+        .#{$typeKey}x-#{$sizeKey} {
+            #{$type}-left:$size * $spacing-base-size;
+            #{$type}-right:$size * $spacing-base-size 
+        }
+        .#{$typeKey}y-#{$sizeKey} {
+            #{$type}-top:$size * $spacing-base-size;
+            #{$type}-bottom:$size * $spacing-base-size 
+        }
+    }
+    // .mt-1
+    @each $directionKey,$direction in $spacing-directions {
+        @each $sizeKey,$size in $spacing-sizes {
+            // .mt-1
+            .#{$typeKey}#{$directionKey}-#{$sizeKey} {
+                #{$type}-#{$direction}:$size * $spacing-base-size
+            }
+        }
+    }
+}
+// button
+.btn{
+    border: none;
+    font-size: 12/13 * $base-font-size;
+    padding: .2rem .6rem;
+}
+// active
+.nav{
+    display: flex;
+    .nav-item{
+        border-bottom: 3px solid transparent;
+        &.active{
+            color: map-get($map: $colors, $key:"primary");
+            border-bottom: 3px solid map-get($map: $colors, $key:"primary");
+        }
+    }
+    &.nav-inverse{
+        .nav-item{
+            border-bottom: 3px solid transparent;
+            color:map-get($map: $colors, $key:"white");
+            &.active{
+                color: map-get($map: $colors, $key:"white");
+                border-bottom: 3px solid map-get($map: $colors, $key:"white");
+            }
+        }
+    }
+}
+.w-100{
+    width: 100%;
+}
+.h-100{
+    height: 100%;
+}
+.block{
+    display: block;
+}
+// sprite
+.sprite{
+    background: url('../assets/index.png') no-repeat 0 0;
+    background-size: 375/13 * $base-font-size;
+    display: inline-block;
+    &.sprite-news{
+        width: 23px;
+        height: 20px;
+        background-position: 63.546% 15.517%;
+    }
+    &.sprite-arrow-up{
+        width: 10px;
+        height:10px;
+        background-position: 38.577% 52.076%;
+    }
+    &.sprite-arrow-down{
+        width: 10px;
+        height:10px;
+        background-position: 38.577% 52.076%;
+    }
+    &.sprite-story{
+        width: 23px;
+        height: 20px;
+        background-position:90.483% 15.614%;
+    }
+    &.sprite-shop{
+        width: 19px;
+        height: 22px;
+        background-position:36.746% 0.924%;
+    }
+    &.sprite-try{
+        width: 20px;
+        height: 20px;
+        background-position:10.408% 15.517%;
+    }
+    &.sprite-new{
+        width: 20px;
+        height: 21px;
+        background-position:89.733% 1.266%;
+    }
+    &.sprite-honor{
+        width: 24px;
+        height: 20px;
+        background-position:36.467% 15.287%;
+    }
+    &.sprite-camp{
+        width: 24px;
+        height: 24px;
+        background-position:63.3% 0.927%;
+    }
+    &.sprite-chat{
+        width: 24px;
+        height: 20px;
+        background-position:0 96.207%;
+    }
+    &.sprite-edition{
+        width: 31px;
+        height: 25px;
+        background-position:9.302% 0.813%;
+    }
+    &.sprite-news-1{
+        width: 13px;
+        height: 13px;
+        background-position:0.138% 50.452%;
+    }
+    &.sprite-menu{
+        width: 18px;
+        height: 3px;
+        background-position:47.619% 56.305%;
+    }
+    &.sprite-hero{
+        width: 12px;
+        height: 13px;
+        background-position:46.768% 60.452%;
+    }
+    &.sprite-video{
+        width: 13px;
+        height: 11px;
+        background-position:0.138% 56.532%;
+    }
+}
+.back{
+    background: url('../assets/back.png') no-repeat 50% 50%;
+    background-size: 8px 14px;
+	width: 8px;
+	height: 14px;
+}
+@each $dir in (top, right, bottom, left) {
+    .border-#{$dir} {
+        border-#{$dir}: 1px solid $border-color;
+    }
+}
