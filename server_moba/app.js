@@ -67,7 +67,7 @@ app.post('/admin/api/upload',auth,upload.single('file'),(req,res)=>{
   fs.rename(oldPath,newPath,()=>{
       console.log('upload success')
   })
-  let imgUrl = 'http://localhost:3000/upload/' + req.file.originalname
+  let imgUrl = 'http://121.36.212.104/upload/' + req.file.originalname
   req.file.url = imgUrl
   res.send(req.file)
 })
