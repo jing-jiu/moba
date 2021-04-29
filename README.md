@@ -213,5 +213,8 @@ schma.virtual('children',{
 - chunk-vendors 引用的第三方库的文件
 - app   自己写的文件
 5. 配置服务器
+- 安装nodejs,npm,mongodb,n(升级node),pm2(后台运行js文件 类似于nodemon  在服务器使用pm2 在本地使用nodemon)
 - 这里选择的是华为的云服务器（新用户可以白嫖一个月）选的是Linux的Ubuntu操作系统。在Linux上使用**apt install nginx**命令安装nginx服务。不出意外应该就可以在浏览器访问到。但是千万要看清楚！！！！ 不要访问成自己的ip地址。他在你登录的时候显示最近一次登录的ip。。我以为那个ip是服务器的ip地址233333.
 - 访问不到检查80端口有没有被占用，防火墙有没有禁用80端口，华为云安全组有没有加http80端口等。
+- 在服务器使用pm2 start ./bin/www 启动服务
+- nginx反向代理 在本地vscode安装插件Remote - SSH可以在本地修改服务器的文件。配置好用户名（root） Host/HostName就可以在vscode访问到服务器。
